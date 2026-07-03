@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>簿記講座のご案内｜商工会議所パソコン教室</title>
+<style>
+:root{
+  --pink:#ff6fa5;
+  --pink-l:#ffd2e2;
+  --yellow:#ffcf4d;
+  --yellow-l:#fff2cc;
+  --blue:#4ec3f7;
+  --blue-l:#d5f2ff;
+  --green:#5ed6a4;
+  --green-l:#d6f8ea;
+  --purple:#a98bf0;
+  --purple-l:#eee3ff;
+  --ink:#3a3550;
+  --paper:#fffdf7;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:18px;}
+body{
+  font-family:"Hiragino Maru Gothic ProN","Hiragino Kaku Gothic ProN","Yu Gothic UI",sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.85;
+  overflow-x:hidden;
+}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px;}
+section{position:relative;}
+h2.sec-title{
+  text-align:center;
+  font-size:clamp(1.7rem,5vw,2.6rem);
+  font-weight:800;
+  margin-bottom:12px;
+  color:var(--ink);
+}
+h2.sec-title span{display:inline-block;position:relative;}
+h2.sec-title span::after{
+  content:"";position:absolute;left:0;bottom:2px;
+  width:100%;height:14px;background:var(--yellow);
+  border-radius:8px;z-index:-1;opacity:.85;
+}
+.sec-lead{text-align:center;color:#8a839c;margin-bottom:40px;font-size:1.08rem;}
+[id]{scroll-margin-top:24px;}
+
+/* ====== ふわっと表示アニメ ====== */
+.reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.2,.8,.2,1);}
+.reveal.on{opacity:1;transform:translateY(0);}
+
+/* キャラの動きアニメ */
+@keyframes swing{0%,100%{transform:rotate(-3deg);}50%{transform:rotate(3deg);}}
+@keyframes bobbing{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+@keyframes waveHands{0%,100%{transform:rotate(-2deg) scale(1);}50%{transform:rotate(2deg) scale(1.04);}}
+.anim-swing{animation:swing 3s ease-in-out infinite;transform-origin:bottom center;}
+.anim-bob{animation:bobbing 3.2s ease-in-out infinite;}
+.anim-wave{animation:waveHands 2.4s ease-in-out infinite;transform-origin:bottom center;}
+
+/* ====== ファーストビュー ====== */
+.hero{
+  background:linear-gradient(135deg,var(--pink-l) 0%,var(--yellow-l) 50%,var(--blue-l) 100%);
+  padding:80px 0 90px;text-align:center;overflow:hidden;
+}
+.hero-badge{
+  display:inline-block;background:#fff;color:var(--pink);
+  padding:8px 24px;border-radius:30px;font-weight:800;font-size:1rem;
+  box-shadow:0 4px 12px rgba(255,111,165,.25);margin-bottom:22px;
+  animation:pop 2.2s ease-in-out infinite;
+}
+@keyframes pop{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+.hero h1{font-size:clamp(1.8rem,6.5vw,3.2rem);font-weight:900;line-height:1.4;margin-bottom:20px;}
+.hero h1 .hl{color:var(--pink);}
+.hero h1 .hl2{color:var(--blue);}
+.hero-sub{
+  max-width:660px;margin:0 auto;font-size:clamp(1rem,2.6vw,1.15rem);
+  color:#5f5975;background:rgba(255,255,255,.6);padding:18px 26px;border-radius:20px;
+}
+.float{position:absolute;font-size:3.2rem;opacity:.85;animation:floaty 6s ease-in-out infinite;user-select:none;}
+.float.f1{top:10%;left:6%;animation-delay:0s;}
+.float.f2{top:22%;right:8%;animation-delay:1s;font-size:3.6rem;}
+.float.f3{bottom:14%;left:12%;animation-delay:2s;font-size:3.4rem;}
+.float.f4{bottom:20%;right:10%;animation-delay:.5s;}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-18px) rotate(4deg);}}
+.wave{display:block;line-height:0;margin-top:-1px;}
+
+/* ====== 導入文 ====== */
+.intro-sec{padding:70px 0 20px;}
+.intro-box{
+  display:flex;gap:30px;align-items:center;flex-wrap:wrap;
+  background:#fff;border-radius:28px;padding:34px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);border:3px solid var(--blue-l);
+}
+.intro-img{flex:0 0 240px;text-align:center;}
+.intro-img img{width:100%;max-width:240px;height:auto;}
+.intro-txt{flex:1;min-width:260px;}
+.intro-txt p{margin-bottom:16px;font-size:1.1rem;color:#4f4a63;}
+.intro-txt p:last-child{margin-bottom:0;}
+.intro-txt b{color:var(--pink);}
+
+/* ====== ロードMAP（一本道の導線） ====== */
+.roadmap-sec{padding:60px 0 70px;background:var(--paper);}
+.timeline{position:relative;max-width:900px;margin:0 auto;padding-left:0;}
+.timeline::before{
+  content:"";position:absolute;left:50%;top:20px;bottom:20px;
+  width:8px;transform:translateX(-50%);
+  background:var(--pink);border-radius:8px;z-index:0;
+}
+.tl-start{position:relative;z-index:2;text-align:center;margin-bottom:8px;}
+.tl-start .bubble{
+  display:inline-block;background:var(--purple);color:#fff;font-weight:800;
+  padding:14px 44px;border-radius:40px;font-size:1.3rem;box-shadow:0 6px 0 #8a6fd6;
+}
+.tl-arrow{position:relative;z-index:2;text-align:center;color:var(--pink);font-size:2.2rem;font-weight:900;
+  margin:2px 0;animation:bounce 1.6s ease-in-out infinite;line-height:1;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
+.tl-step{position:relative;z-index:2;margin:0 auto;}
+.tl-card{
+  display:flex;align-items:center;gap:16px;background:#fff;
+  border:3px solid var(--blue);border-radius:22px;padding:18px 22px;
+  box-shadow:0 6px 18px rgba(78,195,247,.18);transition:.25s;
+  text-decoration:none;color:var(--ink);
+}
+.tl-card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 14px 28px rgba(78,195,247,.32);}
+.tl-num{
+  flex:0 0 52px;width:52px;height:52px;border-radius:50%;
+  background:var(--blue);color:#fff;font-weight:900;font-size:1.4rem;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 0 rgba(0,0,0,.12);
+}
+.tl-body{flex:1;text-align:left;}
+.tl-body .t-title{font-weight:800;font-size:1.3rem;display:block;}
+.tl-body .t-desc{font-size:.98rem;color:#8a839c;margin-top:4px;display:block;line-height:1.5;}
+.tl-side{flex:0 0 auto;text-align:right;}
+.tl-go{display:block;font-size:.88rem;color:#a49ec0;font-weight:700;white-space:nowrap;}
+.tl-card.pink{border-color:var(--pink);}.tl-card.pink .tl-num{background:var(--pink);}
+.tl-card.green{border-color:var(--green);}.tl-card.green .tl-num{background:var(--green);}
+.tl-card.yellow{border-color:var(--yellow);}.tl-card.yellow .tl-num{background:var(--yellow);color:#7a5a00;}
+.tl-card.purple{border-color:var(--purple);}.tl-card.purple .tl-num{background:var(--purple);}
+.tl-branch{position:relative;z-index:2;}
+.tl-branch .branch-label{
+  text-align:center;margin:6px auto 10px;
+  background:var(--yellow);color:#7a5a00;font-weight:800;font-size:.95rem;
+  padding:6px 20px;border-radius:20px;display:inline-block;
+  position:relative;left:50%;transform:translateX(-50%);
+}
+.tl-branch .pair{display:flex;gap:16px;flex-wrap:wrap;}
+.tl-branch .pair .tl-card{flex:1;min-width:340px;}
+.badge-mini{
+  display:inline-block;background:var(--yellow);color:#7a5a00;font-weight:800;
+  font-size:.78rem;padding:2px 10px;border-radius:12px;margin-left:6px;vertical-align:middle;
+}
+
+/* 補足ボックス */
+.notes{margin-top:50px;display:grid;gap:16px;}
+.note-card{
+  display:flex;gap:16px;align-items:flex-start;background:#fff;border-radius:18px;
+  padding:20px 24px;box-shadow:0 4px 14px rgba(0,0,0,.05);border-left:6px solid var(--green);
+}
+.note-card .ico{font-size:2rem;flex-shrink:0;}
+.note-card p{font-size:1.05rem;}
+.note-card:nth-child(2){border-left-color:var(--pink);}
+.note-card:nth-child(3){border-left-color:var(--blue);}
+
+/* ====== リモートアドバイザー ====== */
+.ra-highlight{
+  margin-top:44px;background:linear-gradient(135deg,var(--blue-l),#eaf9ff);
+  border-radius:28px;padding:34px;display:flex;gap:28px;align-items:center;flex-wrap:wrap;
+  box-shadow:0 8px 24px rgba(78,195,247,.2);border:3px solid var(--blue);
+}
+.ra-highlight .ra-img{flex:0 0 200px;text-align:center;}
+.ra-highlight .ra-img img{width:100%;max-width:200px;height:auto;}
+.ra-highlight .ra-txt{flex:1;min-width:260px;}
+.ra-highlight .ra-title{
+  display:inline-block;background:var(--blue);color:#fff;font-weight:800;
+  padding:8px 20px;border-radius:20px;margin-bottom:12px;font-size:1.08rem;
+}
+.ra-highlight .ra-txt p{font-size:1.08rem;color:#3f5a68;}
+.ra-highlight .ra-txt .note{font-size:.9rem;color:#7a8b94;margin-top:10px;}
+
+/* ====== 模擬試験（共通ハイライト） ====== */
+.mock-highlight{
+  margin-top:34px;background:linear-gradient(135deg,var(--green-l),#eafff5);
+  border-radius:28px;padding:34px;box-shadow:0 8px 24px rgba(94,214,164,.2);
+  border:3px solid var(--green);
+}
+.mock-flex{display:flex;gap:28px;align-items:center;flex-wrap:wrap;justify-content:center;}
+.mock-flex .mock-img{flex:0 0 190px;text-align:center;}
+.mock-flex .mock-img img{width:100%;max-width:190px;height:auto;}
+.mock-flex .mock-main{flex:1;min-width:280px;text-align:center;}
+.mock-highlight .mh-title{
+  display:inline-block;background:var(--green);color:#fff;font-weight:800;
+  padding:8px 22px;border-radius:20px;margin-bottom:14px;font-size:1.15rem;
+}
+.mock-highlight p{font-size:1.1rem;color:#276b52;max-width:760px;margin:0 auto 14px;}
+.mock-highlight p:last-child{margin-bottom:0;}
+.mock-highlight b{color:#1e9e6f;}
+.mock-count{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:18px 0;}
+.mock-count .mc{
+  background:#fff;border-radius:18px;padding:14px 20px;min-width:150px;
+  box-shadow:0 4px 12px rgba(0,0,0,.06);border:2px solid var(--green);
+}
+.mock-count .mc .mc-name{font-weight:800;font-size:.98rem;color:var(--ink);}
+.mock-count .mc .mc-num{font-weight:900;font-size:1.5rem;color:#1e9e6f;margin-top:2px;}
+.mock-count .mc .mc-num small{font-size:.85rem;}
+
+/* ====== 講座紹介ヘッダーのキャラ ====== */
+.courses-head{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:8px;}
+.courses-head .ch-img{flex:0 0 150px;text-align:center;}
+.courses-head .ch-img img{width:100%;max-width:150px;height:auto;}
+
+/* ====== 講座カード ====== */
+.courses{padding:70px 0;background:linear-gradient(180deg,#fff6fa,#f4fbff);}
+.card{
+  background:#fff;border-radius:28px;padding:34px;margin-bottom:34px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);border-top:8px solid var(--blue);
+  position:relative;overflow:hidden;transition:.3s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(0,0,0,.1);}
+.card.c-pink{border-top-color:var(--pink);}
+.card.c-green{border-top-color:var(--green);}
+.card.c-yellow{border-top-color:var(--yellow);}
+.card.c-purple{border-top-color:var(--purple);}
+.card-head{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-bottom:8px;}
+.card-emoji{
+  font-size:2.4rem;width:70px;height:70px;display:flex;align-items:center;justify-content:center;
+  background:var(--blue-l);border-radius:20px;flex-shrink:0;
+}
+.c-pink .card-emoji{background:var(--pink-l);}
+.c-green .card-emoji{background:var(--green-l);}
+.c-yellow .card-emoji{background:var(--yellow-l);}
+.c-purple .card-emoji{background:var(--purple-l);}
+.card-head h3{font-size:1.75rem;font-weight:900;}
+.time-tag{
+  margin-left:auto;background:var(--yellow);color:#7a5a00;font-weight:800;
+  padding:10px 20px;border-radius:16px;text-align:center;line-height:1.2;box-shadow:0 4px 0 #e6b52e;
+}
+.time-tag small{display:block;font-size:.72rem;font-weight:700;opacity:.85;}
+.time-tag b{font-size:1.3rem;}
+.card .catch{
+  font-weight:800;font-size:1.2rem;color:var(--pink);margin:6px 0 12px;
+}
+.c-green .catch{color:#279c72;}.c-yellow .catch{color:#c99400;}.c-purple .catch{color:#6a4fc0;}
+.card p.desc{margin:0 0 16px;font-size:1.08rem;color:#4f4a63;}
+
+/* 試験代タグ */
+.fee-tag{
+  display:inline-flex;align-items:center;gap:8px;background:var(--pink-l);color:#d64f87;
+  font-weight:800;font-size:1.02rem;padding:8px 18px;border-radius:16px;margin-bottom:16px;
+}
+.fee-tag .fi{font-size:1.3rem;}
+.c-green .fee-tag{background:var(--green-l);color:#279c72;}
+.c-yellow .fee-tag{background:var(--yellow-l);color:#c99400;}
+.c-purple .fee-tag{background:var(--purple-l);color:#6a4fc0;}
+
+/* 魅力ポイント */
+.merits{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;}
+.merit{
+  background:var(--paper);border-radius:16px;padding:18px 14px;text-align:center;
+  border:2px solid #f0ebe0;transition:.2s;
+}
+.merit:hover{transform:translateY(-3px);border-color:var(--yellow);}
+.merit .m-ico{font-size:2.1rem;}
+.merit .m-t{font-weight:800;font-size:.98rem;margin:8px 0 4px;}
+.merit .m-d{font-size:.88rem;color:#7a7690;line-height:1.6;}
+
+.reco{background:var(--paper);border-radius:16px;padding:18px 22px;margin-top:16px;}
+.reco-title{font-weight:800;color:var(--pink);margin-bottom:8px;font-size:1.08rem;}
+.c-green .reco-title,.c-yellow .reco-title{color:#279c72;}
+.reco ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.reco li{padding-left:30px;position:relative;font-size:1.03rem;}
+.reco li::before{content:"✔";position:absolute;left:0;color:var(--green);font-weight:900;font-size:1.1rem;}
+
+/* 模擬試験（カード内ミニ） */
+.mock-mini{
+  margin-top:16px;background:var(--green-l);border-radius:16px;padding:18px 22px;
+  border-left:6px solid var(--green);
+}
+.mock-mini .mm-title{font-weight:800;color:#1e9e6f;margin-bottom:6px;font-size:1.05rem;display:flex;align-items:center;gap:8px;}
+.mock-mini .mm-title .mi{font-size:1.4rem;}
+.mock-mini .mm-num{font-weight:900;color:#1e9e6f;}
+.mock-mini p{font-size:1rem;color:#3f6b58;}
+
+.info-box{
+  margin-top:16px;background:var(--blue-l);border-radius:16px;padding:22px;
+  border-left:6px solid var(--blue);display:flex;gap:22px;align-items:center;flex-wrap:wrap;
+}
+.info-box .ib-img{flex:0 0 150px;text-align:center;}
+.info-box .ib-img img{width:100%;max-width:150px;height:auto;}
+.info-box .ib-body{flex:1;min-width:220px;}
+.info-box .ib-title{font-weight:800;color:#1f8fc4;margin-bottom:6px;font-size:1.1rem;}
+.info-box p{font-size:1.02rem;}
+.info-box .note{font-size:.9rem;color:#7a7690;margin-top:8px;}
+.tip-box{
+  margin-top:16px;background:var(--yellow-l);border-radius:16px;padding:18px 22px;border-left:6px solid var(--yellow);
+}
+.tip-box .ib-title{font-weight:800;color:#c99400;margin-bottom:6px;font-size:1.1rem;}
+.tip-box p{font-size:1.03rem;}
+.step-tag{
+  display:inline-block;background:var(--ink);color:#fff;font-size:.82rem;font-weight:800;
+  padding:5px 16px;border-radius:20px;margin-bottom:16px;
+}
+
+/* ====== CTA ====== */
+.cta{
+  background:linear-gradient(135deg,var(--pink) 0%,var(--purple) 100%);
+  padding:70px 20px;text-align:center;color:#fff;position:relative;overflow:hidden;
+}
+.cta::before,.cta::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.15);}
+.cta::before{width:200px;height:200px;top:-60px;left:-40px;}
+.cta::after{width:260px;height:260px;bottom:-90px;right:-60px;}
+.cta-in{position:relative;z-index:2;max-width:720px;margin:0 auto;}
+.cta-img{max-width:210px;width:62%;margin:0 auto 6px;display:block;}
+.cta h2{font-size:clamp(1.6rem,5vw,2.3rem);font-weight:900;margin:14px 0 20px;line-height:1.5;}
+.cta p{font-size:1.12rem;line-height:2;margin-bottom:24px;opacity:.97;}
+.q-list{display:flex;flex-direction:column;gap:12px;max-width:560px;margin:0 auto 30px;}
+.q-item{
+  background:rgba(255,255,255,.95);color:var(--ink);border-radius:18px;padding:16px 24px;
+  font-weight:700;font-size:1.05rem;text-align:left;display:flex;gap:12px;align-items:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+}
+.q-item .qm{font-size:1.7rem;flex-shrink:0;}
+.cta-final{
+  background:#fff;color:var(--pink);font-weight:900;font-size:1.2rem;
+  padding:18px 44px;border-radius:40px;display:inline-flex;gap:10px;align-items:center;box-shadow:0 8px 0 rgba(0,0,0,.15);
+}
+
+/* ====== フッター ====== */
+footer{background:var(--ink);color:#cfc9de;text-align:center;padding:32px 20px;font-size:.95rem;}
+footer .footer-img{max-width:130px;width:40%;margin:0 auto 10px;display:block;}
+footer .logo{color:#fff;margin-bottom:8px;font-weight:800;font-size:1.15rem;}
+
+/* ====== トップへ戻るボタン ====== */
+.to-top{
+  position:fixed;right:24px;bottom:24px;z-index:999;
+  width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;
+  line-height:1;
+  box-shadow:0 6px 18px rgba(255,111,165,.45);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:transform .2s, box-shadow .2s;
+  animation:bobbing 2.8s ease-in-out infinite;
+}
+.to-top:hover{transform:translateY(-4px) scale(1.08);box-shadow:0 10px 24px rgba(255,111,165,.55);}
+.to-top .arw{font-size:1.5rem;font-weight:900;margin-bottom:0;}
+.to-top .lbl{font-size:.55rem;font-weight:800;margin-top:-2px;}
+
+/* ====== レスポンシブ ====== */
+@media(max-width:640px){
+  html{font-size:16px;}
+  .merits{grid-template-columns:1fr;}
+  .card{padding:22px;}
+  .card-head h3{font-size:1.4rem;}
+  .time-tag{margin-left:0;width:100%;}
+  .card-head{flex-direction:column;align-items:flex-start;}
+  .float{font-size:2.2rem!important;}
+  .intro-img{flex:0 0 170px;margin:0 auto;}
+  .ra-highlight .ra-img{flex:0 0 150px;margin:0 auto;}
+  .tl-branch .pair{flex-direction:column;}
+  .tl-branch .pair .tl-card{min-width:0;}
+  .tl-side{display:none;}
+  .to-top{width:52px;height:52px;right:16px;bottom:16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ①ファーストビュー -->
+<section class="hero" id="top">
+  <span class="float f1">🧮</span>
+  <span class="float f2">📊</span>
+  <span class="float f3">✏️</span>
+  <span class="float f4">💰</span>
+  <div class="wrap">
+    <span class="hero-badge">🎓 はじめてでも安心の簿記講座</span>
+    <h1>簿記を知らなくても大丈夫！<br><span class="hl">教室の簿記講座</span>で<br><span class="hl2">ステップアップ！</span></h1>
+    <p class="hero-sub">初めて簿記を学ぶ方から、資格取得・キャリアアップを目指す方まで。<br>あなたに合った講座を<b>商工会議所パソコン教室</b>ではご用意しています。</p>
+  </div>
+</section>
+<div class="wave">
+<svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="width:100%;height:60px;"><path fill="#fffdf7" d="M0,32L60,37.3C120,43,240,53,360,53.3C480,53,600,43,720,37.3C840,32,960,32,1080,37.3C1200,43,1320,53,1380,58.7L1440,64L1440,80L0,80Z"></path></svg>
+</div>
+
+<!-- 導入文 -->
+<section class="intro-sec">
+  <div class="wrap">
+    <div class="intro-box reveal">
+      <div class="intro-img">
+        <img class="anim-bob" src="image/image2.png" alt="サポートスタッフ" loading="lazy">
+      </div>
+      <div class="intro-txt">
+        <p>商工会議所パソコン教室では、簿記を初めて学ぶ方から資格取得を目指す方まで、幅広いレベルに対応した講座を多数ご用意しています。<b>経験豊富な講師がわかりやすくサポート</b>しますので、初めての方でも安心して学習を進めることができます。</p>
+        <p>簿記の知識は、経理や事務の仕事だけでなく、会社のお金の流れを理解したり、家計管理や副業の収支管理に役立てたりすることができます。また、資格取得は就職・転職やキャリアアップにもつながります。<br>ぜひ自分に合った学習方法を見つけ、簿記の学習をスタートしてみましょう。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ②おすすめ受講順（一本道の導線） -->
+<section class="roadmap-sec">
+  <div class="wrap">
+    <h2 class="sec-title reveal"><span>おすすめ受講順ロードマップ</span></h2>
+    <p class="sec-lead reveal">スタートから順番にたどるだけ！気になる講座をタップすると詳しい紹介へジャンプします 🗺️</p>
+
+    <div class="timeline">
+      <!-- スタート -->
+      <div class="tl-start reveal"><span class="bubble">🚩 ここからスタート！</span></div>
+      <div class="tl-arrow reveal">▼</div>
+
+      <!-- 分岐：初級 or 3級 -->
+      <div class="tl-branch reveal">
+        <div style="text-align:center;"><span class="branch-label">まずはこの2つ！どちらから始めてもOK 👇</span></div>
+        <div class="pair">
+          <a class="tl-card pink" href="#c-shokyu">
+            <span class="tl-num">1</span>
+            <span class="tl-body">
+              <span class="t-title">📘 簿記初級</span>
+              <span class="t-desc">「簿記ってなに？」から丁寧に学べる入門講座。最短で基礎が身につきます。</span>
+            </span>
+            <span class="tl-side"><span class="tl-go">▶ 詳しく見る</span></span>
+          </a>
+          <a class="tl-card green" href="#c-3kyu">
+            <span class="tl-num">1</span>
+            <span class="tl-body">
+              <span class="t-title">📗 簿記3級</span>
+              <span class="t-desc">就職・転職に強い人気の定番資格。実務にも役立つ知識が学べます。</span>
+            </span>
+            <span class="tl-side"><span class="tl-go">▶ 詳しく見る</span></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="tl-arrow reveal">▼</div>
+
+      <!-- 直前対策（3級の次に配置） -->
+      <a class="tl-card purple tl-step reveal" href="#c-chokuzen">
+        <span class="tl-num">2</span>
+        <span class="tl-body">
+          <span class="t-title">🎯 簿記3級 試験直前対策講座</span>
+          <span class="t-desc">本試験前の総仕上げ。模擬試験を受けたあとの受講もおすすめです。</span>
+        </span>
+        <span class="tl-side"><span class="tl-go">▶ 詳しく見る</span></span>
+      </a>
+
+      <div class="tl-arrow reveal">▼</div>
+
+      <!-- 原価計算初級 -->
+      <a class="tl-card green tl-step reveal" href="#c-genka">
+        <span class="tl-num">3</span>
+        <span class="tl-body">
+          <span class="t-title">🏭 原価計算初級 <span class="badge-mini">👍 おすすめ</span></span>
+          <span class="t-desc">2級で学ぶ工業簿記の入口。先に学ぶと2級がグッと理解しやすくなります。</span>
+        </span>
+        <span class="tl-side"><span class="tl-go">▶ 詳しく見る</span></span>
+      </a>
+
+      <div class="tl-arrow reveal">▼</div>
+
+      <!-- 簿記2級 -->
+      <a class="tl-card yellow tl-step reveal" href="#c-2kyu">
+        <span class="tl-num">4</span>
+        <span class="tl-body">
+          <span class="t-title">🏆 簿記2級</span>
+          <span class="t-desc">商業＋工業簿記まで学ぶ実践講座。経理・会計職やキャリアアップに役立ちます。</span>
+        </span>
+        <span class="tl-side"><span class="tl-go">▶ 詳しく見る</span></span>
+      </a>
+
+      <div class="tl-arrow reveal">▼</div>
+      <div class="tl-start reveal"><span class="bubble" style="background:var(--pink);box-shadow:0 6px 0 #e2578e;">🎉 スキルアップ!!</span></div>
+    </div>
+
+    <!-- 補足 -->
+    <div class="notes">
+      <div class="note-card reveal">
+        <span class="ico">🌱</span>
+        <p>簿記が初めての方は<b>「簿記初級」「簿記3級」のどちらから始めても問題ありません。</b>気軽にスタートできる講座からどうぞ！</p>
+      </div>
+      <div class="note-card reveal">
+        <span class="ico">🏭</span>
+        <p>簿記2級を目指す方は、工業簿記の基礎を学べる<b>「原価計算初級」</b>を受講してから進むと理解しやすくなります。<b>（必須ではありません）</b></p>
+      </div>
+      <div class="note-card reveal">
+        <span class="ico">🎯</span>
+        <p>簿記3級試験直前対策講座は、模擬試験をする前に受講するのはもちろん、<b>一度模擬試験を受験して苦手分野を把握してから受講する方法もおすすめ</b>です。</p>
+      </div>
+    </div>
+
+    <!-- リモートアドバイザー（ロードマップ部分） -->
+    <div class="ra-highlight reveal">
+      <div class="ra-img">
+        <img class="anim-bob" src="image/image3.png" alt="リモートアドバイザー" loading="lazy">
+      </div>
+      <div class="ra-txt">
+        <span class="ra-title">💻 リモートアドバイザーが学習をサポート！</span>
+        <p>学習中に分からない問題が出てきた場合は、<b>リモートアドバイザー</b>も利用できます。教室だけでは解決できない疑問を、オンラインで簿記の専門スタッフへ質問できるため、一人で悩まず学習を進められます。苦手な論点をその場で解決できるため、理解を深めながら安心して学習できます。</p>
+        <p class="note">※教室により利用方法が異なる場合がありますので、詳しくは講師へお問い合わせください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③各講座紹介 -->
+<section class="courses" id="courses">
+  <div class="wrap">
+    <div class="courses-head reveal">
+      <div class="ch-img"><img class="anim-bob" src="image/image5.png" alt="講座のご案内" loading="lazy"></div>
+      <h2 class="sec-title" style="margin-bottom:0;"><span>各講座のご紹介</span></h2>
+    </div>
+    <p class="sec-lead reveal">それぞれの講座の魅力とおすすめポイントをまとめました 📚</p>
+
+    <!-- 簿記初級 -->
+    <div class="card c-pink reveal" id="c-shokyu">
+      <span class="step-tag">STEP 1 ｜ 入門</span>
+      <div class="card-head">
+        <div class="card-emoji">📘</div>
+        <h3>簿記初級</h3>
+        <div class="time-tag"><small>標準受講時間</small><b>10〜12時間</b></div>
+      </div>
+      <p class="catch">✨ 「簿記ってなに？」から、たった10時間で“わかる”に変わる！</p>
+      <div class="fee-tag"><span class="fi">💴</span>試験代：2,200円（税込）</div>
+      <p class="desc">簿記の基本を短期間で学べる入門講座です。「簿記とは何か」から丁寧に学習できるため、資格学習が初めての方でも安心して始められます。専門用語もひとつずつ噛み砕いて解説するので、数字が苦手な方でもつまずきません。短時間で基礎を身につけたい方にもおすすめです。</p>
+      <div class="merits">
+        <div class="merit"><div class="m-ico">⏱️</div><div class="m-t">最短で基礎習得</div><div class="m-d">1〜2週間ほどで簿記の全体像がつかめます</div></div>
+        <div class="merit"><div class="m-ico">🔰</div><div class="m-t">ゼロから安心</div><div class="m-d">予備知識ゼロでもOK。用語も丁寧に解説</div></div>
+        <div class="merit"><div class="m-ico">🚪</div><div class="m-t">3級への近道</div><div class="m-d">次の3級学習がスムーズになる土台づくり</div></div>
+      </div>
+      <div class="mock-mini">
+        <div class="mm-title"><span class="mi">📝</span>模擬試験は <span class="mm-num">3パターン</span></div>
+        <p>本番形式の模擬試験を3種類ご用意。何度でも挑戦できます。最初はテキストを見ながらでもOK！慣れてきたら本試験にチャレンジしましょう。</p>
+      </div>
+      <div class="reco">
+        <div class="reco-title">💡 こんな方におすすめ</div>
+        <ul>
+          <li>簿記を初めて学ぶ</li>
+          <li>短期間で基礎を身につけたい</li>
+          <li>まずは気軽に資格へ挑戦したい</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 簿記3級 -->
+    <div class="card c-green reveal" id="c-3kyu">
+      <span class="step-tag">STEP 1 ｜ 人気の定番資格</span>
+      <div class="card-head">
+        <div class="card-emoji">📗</div>
+        <h3>簿記3級</h3>
+        <div class="time-tag"><small>標準受講時間</small><b>40〜50時間</b></div>
+      </div>
+      <p class="catch">✨ 履歴書に書ける！就職・転職で一番選ばれる王道資格</p>
+      <div class="fee-tag"><span class="fi">💴</span>試験代：3,300円（税込）</div>
+      <p class="desc">企業や個人事業の会計処理の基本を学ぶ人気資格です。就職・転職にも活かせる資格として、多くの方が受験しています。講座では基礎学習だけでなく、問題演習や模擬試験を通して本番形式に慣れながら試験合格を目指します。学んだ知識は実務でもそのまま役立ちます。</p>
+      <div class="merits">
+        <div class="merit"><div class="m-ico">💼</div><div class="m-t">就職・転職に有利</div><div class="m-d">経理・事務職で評価されやすい定番資格</div></div>
+        <div class="merit"><div class="m-ico">📝</div><div class="m-t">演習+模試で万全</div><div class="m-d">問題演習と模擬試験で得点力を養成</div></div>
+        <div class="merit"><div class="m-ico">🏠</div><div class="m-t">実生活にも活用</div><div class="m-d">家計や副業の収支管理にも役立つ知識</div></div>
+      </div>
+      <div class="mock-mini">
+        <div class="mm-title"><span class="mi">📝</span>模擬試験は <span class="mm-num">5パターン</span></div>
+        <p>本番さながらの模擬試験を5種類ご用意。何度でも受けられます。最初はテキストを見ながらでもOK！「これでいける！」と思えたら本試験へ。</p>
+      </div>
+      <div class="reco">
+        <div class="reco-title" style="color:#279c72;">💡 こんな方におすすめ</div>
+        <ul>
+          <li>就職・転職に役立つ資格が欲しい</li>
+          <li>経理・会計の知識を身につけたい</li>
+          <li>将来的に簿記2級まで目指したい</li>
+        </ul>
+      </div>
+      <!-- リモートアドバイザー（簿記3級の下） -->
+      <div class="info-box">
+        <div class="ib-img">
+          <img class="anim-bob" src="image/image1.png" alt="リモートアドバイザー" loading="lazy">
+        </div>
+        <div class="ib-body">
+          <div class="ib-title">💻 リモートアドバイザーについて</div>
+          <p>学習中に分からない問題が出てきた場合は、<b>リモートアドバイザー</b>も利用できます。教室だけでは解決できない疑問を、オンラインで簿記の専門スタッフへ質問できるため、一人で悩まず学習を進められます。苦手な論点をその場で解決できるため、理解を深めながら安心して学習できます。</p>
+          <p class="note">※教室により利用方法が異なる場合がありますので、詳しくは講師へお問い合わせください。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 簿記3級試験直前対策講座（3級の次に配置） -->
+    <div class="card reveal" id="c-chokuzen" style="border-top-color:var(--blue);">
+      <span class="step-tag">STEP 2 ｜ 合格への総仕上げ</span>
+      <div class="card-head">
+        <div class="card-emoji">🎯</div>
+        <h3>簿記3級 試験直前対策講座</h3>
+        <div class="time-tag"><small>標準受講時間</small><b>6時間</b></div>
+      </div>
+      <p class="catch" style="color:#1f8fc4;">✨ ラストスパートで合格をグッと引き寄せる総仕上げ！</p>
+      <p class="desc">簿記3級の本試験に向けた総仕上げ講座です。頻出問題や時間配分、本番形式の演習を通して得点力を高めます。苦手分野を集中的に見直せるので、「あと少し」の不安を自信に変えて本番に臨めます。</p>
+      <div class="merits">
+        <div class="merit"><div class="m-ico">🔥</div><div class="m-t">頻出問題を攻略</div><div class="m-d">出やすいポイントを重点的に対策</div></div>
+        <div class="merit"><div class="m-ico">⏰</div><div class="m-t">時間配分が身につく</div><div class="m-d">本番形式で解くペースをつかめる</div></div>
+        <div class="merit"><div class="m-ico">💪</div><div class="m-t">苦手を克服</div><div class="m-d">弱点をピンポイントで復習できる</div></div>
+      </div>
+      <div class="reco">
+        <div class="reco-title" style="color:#1f8fc4;">⏰ おすすめの受講タイミング</div>
+        <ul>
+          <li>本試験の直前</li>
+          <li>模擬試験を一度受験したあと</li>
+          <li>苦手分野を重点的に復習したいとき</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 原価計算初級 -->
+    <div class="card c-yellow reveal" id="c-genka">
+      <span class="step-tag">STEP 3 ｜ 2級への橋渡し（おすすめ）</span>
+      <div class="card-head">
+        <div class="card-emoji">🏭</div>
+        <h3>原価計算初級</h3>
+        <div class="time-tag"><small>標準受講時間</small><b>8〜10時間</b></div>
+      </div>
+      <p class="catch">✨ 2級で多くの人がつまずく「工業簿記」を、先取りでラクに攻略！</p>
+      <div class="fee-tag"><span class="fi">💴</span>試験代：2,200円（税込）</div>
+      <p class="desc">簿記2級で学習する工業簿記の入口となる講座です。原価計算の基本を先に学んでおくことで、簿記2級の工業簿記をより理解しやすくなります。モノづくりの現場でコストがどう計算されるかを学べるため、製造業の実務理解にもつながります。</p>
+      <div class="merits">
+        <div class="merit"><div class="m-ico">🧩</div><div class="m-t">2級がスムーズ</div><div class="m-d">難関の工業簿記を先取りで理解しやすく</div></div>
+        <div class="merit"><div class="m-ico">⚡</div><div class="m-t">短時間で完結</div><div class="m-d">8〜10時間でサッと基礎が身につく</div></div>
+        <div class="merit"><div class="m-ico">🏢</div><div class="m-t">実務にも役立つ</div><div class="m-d">製造原価やコスト管理の考え方が学べる</div></div>
+      </div>
+      <div class="mock-mini">
+        <div class="mm-title"><span class="mi">📝</span>模擬試験は <span class="mm-num">2パターン</span></div>
+        <p>本番形式の模擬試験を2種類ご用意。何度でも挑戦できます。最初はテキストを見ながらでもOK！自信がついたら本試験にチャレンジ。</p>
+      </div>
+      <div class="tip-box">
+        <div class="ib-title">✨ ワンポイント</div>
+        <p>簿記2級の前に受講することをおすすめします。<b>必須ではありません</b>が、工業簿記が初めての方は受講してから2級へ進むとスムーズです。</p>
+      </div>
+    </div>
+
+    <!-- 簿記2級 -->
+    <div class="card c-purple reveal" id="c-2kyu">
+      <span class="step-tag">STEP 4 ｜ 実践レベル</span>
+      <div class="card-head">
+        <div class="card-emoji">🏆</div>
+        <h3>簿記2級</h3>
+        <div class="time-tag"><small>標準受講時間</small><b>80〜90時間</b></div>
+      </div>
+      <p class="catch">✨ 経理のプロへ。企業から求められる“武器になる”資格</p>
+      <div class="fee-tag"><span class="fi">💴</span>試験代：5,500円（税込）</div>
+      <p class="desc">商業簿記に加え、工業簿記まで学習する実践的な講座です。経理・会計職を目指す方はもちろん、企業分析や経営管理など幅広い知識を身につけることができます。決算書を読み解く力が身につくので、ビジネスの数字に強くなりたい方にも最適です。</p>
+      <div class="merits">
+        <div class="merit"><div class="m-ico">📈</div><div class="m-t">キャリアアップ</div><div class="m-d">求人でも評価が高く、昇進・転職に有利</div></div>
+        <div class="merit"><div class="m-ico">🔍</div><div class="m-t">決算書が読める</div><div class="m-d">企業分析や経営判断に活かせる力に</div></div>
+        <div class="merit"><div class="m-ico">🛠️</div><div class="m-t">実務レベル</div><div class="m-d">商業+工業簿記で幅広い場面に対応</div></div>
+      </div>
+      <div class="mock-mini">
+        <div class="mm-title"><span class="mi">📝</span>模擬試験は <span class="mm-num">5パターン</span></div>
+        <p>本番さながらの模擬試験を5種類ご用意。何度でも受けられます。最初はテキストを見ながらでもOK！くり返して合格力を鍛えましょう。</p>
+      </div>
+      <div class="reco">
+        <div class="reco-title" style="color:#6a4fc0;">💡 こんな方におすすめ</div>
+        <ul>
+          <li>経理・会計職を目指したい</li>
+          <li>キャリアアップしたい</li>
+          <li>実務レベルの簿記知識を身につけたい</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 模擬試験（講座紹介の下・全体案内） -->
+    <div class="mock-highlight reveal">
+      <div class="mock-flex">
+        <div class="mock-img">
+          <img class="anim-bob" src="image/image5.png" alt="模擬試験について" loading="lazy">
+        </div>
+        <div class="mock-main">
+          <span class="mh-title">📝 模擬試験について</span>
+          <p><b>本番さながらの模擬試験は、何度でもチャレンジできます！</b><br>「最初はまだ自信がない…」という方も大丈夫。<b>最初はテキストを見ながら解いてもOK</b>です。</p>
+          <p>くり返し練習して「これでいける！」と思えたら、いよいよ本試験にチャレンジ 💪<br>各講座でご用意している模擬試験のパターン数はこちらです👇</p>
+        </div>
+      </div>
+      <div class="mock-count">
+        <div class="mc"><div class="mc-name">📘 簿記初級</div><div class="mc-num">3<small>パターン</small></div></div>
+        <div class="mc"><div class="mc-name">📗 簿記3級</div><div class="mc-num">5<small>パターン</small></div></div>
+        <div class="mc"><div class="mc-name">🏭 原価計算初級</div><div class="mc-num">2<small>パターン</small></div></div>
+        <div class="mc"><div class="mc-name">🏆 簿記2級</div><div class="mc-num">5<small>パターン</small></div></div>
+      </div>
+      <p class="note" style="color:#5a8071;font-size:.95rem;text-align:center;">※模擬試験の実施日程は、教室の講師までお気軽にご相談ください。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ④CTA -->
+<section class="cta" id="cta">
+  <div class="cta-in">
+    <img class="cta-img anim-swing" src="image/image6.png" alt="講師にご相談ください" loading="lazy">
+    <h2 class="reveal">どの講座から始めればよいか<br>迷ったらお気軽にご相談ください。</h2>
+    <p class="reveal">学習経験や目標、資格取得の目的に合わせて、<br>講師が最適な受講プランをご案内いたします。</p>
+    <div class="q-list">
+      <div class="q-item reveal"><span class="qm">❓</span>簿記初級と簿記3級のどちらから始めればいい？</div>
+      <div class="q-item reveal"><span class="qm">❓</span>簿記2級を目指したいけれど何から始めればいい？</div>
+      <div class="q-item reveal"><span class="qm">❓</span>簿記の知識が全くなくても大丈夫？</div>
+      <div class="q-item reveal"><span class="qm">❓</span>学習ができるか不安…こんな私でも大丈夫？</div>
+      <div class="q-item reveal"><span class="qm">❓</span>教室で簿記を学習している人はどれぐらいいる？</div>
+    </div>
+    <p class="reveal" style="margin-bottom:26px;">など、ご不明な点がございましたら、<br>お気軽に教室の講師までお問い合わせください。</p>
+    <div class="cta-final reveal">👩‍🏫 まずは教室の講師にご相談を！</div>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer>
+  <img class="footer-img anim-swing" src="image/image6.png" alt="お問い合わせをお待ちしております" loading="lazy">
+  <div class="logo">商工会議所パソコン教室</div>
+  <p>簿記講座のご案内 ／ お問い合わせは各教室の講師まで</p>
+</footer>
+
+<!-- トップへ戻るボタン -->
+<a class="to-top" href="#top" aria-label="ページの一番上へ戻る">
+  <span class="arw">↑</span>
+  <span class="lbl">TOP</span>
+</a>
+
+<script>
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach((e)=>{
+    if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}
+  });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach((el)=>io.observe(el));
+</script>
+
+</body>
+</html>
