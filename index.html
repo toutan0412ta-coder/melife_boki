@@ -346,6 +346,44 @@ footer .logo{color:#fff;margin-bottom:8px;font-weight:800;font-size:1.15rem;}
 .to-top .lbl{font-size:.55rem;font-weight:800;margin-top:-2px;}
 
 /* ====== レスポンシブ ====== */
+@media (max-width: 768px) {
+
+  /* ファーストビュー全体を縦積みに */
+  .hero,
+  .firstview {
+    flex-direction: column;   /* 横並び→縦並びに */
+    text-align: center;
+    padding: 20px 16px;
+    gap: 16px;                /* 画像と文字の間に余白 */
+  }
+
+  /* トップのアイコン画像を絶対配置していた場合は解除 */
+  .hero-icon,
+  .firstview img,
+  .top-icon {
+    position: static !important;  /* absoluteなどを解除 */
+    top: auto;
+    right: auto;
+    left: auto;
+    transform: none;
+    max-width: 55%;            /* 画像を小さめに */
+    height: auto;
+    margin: 0 auto;            /* 中央寄せ */
+    display: block;
+  }
+
+  /* 見出し・説明文がアイコンと重ならないよう余白確保 */
+  .hero h1,
+  .firstview h1,
+  .hero p,
+  .firstview p {
+    position: relative;
+    z-index: 2;                /* 文字を前面に */
+    margin-top: 8px;
+    padding: 0 8px;
+    word-break: break-word;    /* 長い文字の折り返し */
+  }
+}
 @media(max-width:640px){
   html{font-size:16px;}
   .merits{grid-template-columns:1fr;}
