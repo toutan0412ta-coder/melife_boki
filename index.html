@@ -346,44 +346,6 @@ footer .logo{color:#fff;margin-bottom:8px;font-weight:800;font-size:1.15rem;}
 .to-top .lbl{font-size:.55rem;font-weight:800;margin-top:-2px;}
 
 /* ====== レスポンシブ ====== */
-@media (max-width: 768px) {
-
-  /* ファーストビュー全体を縦積みに */
-  .hero,
-  .firstview {
-    flex-direction: column;   /* 横並び→縦並びに */
-    text-align: center;
-    padding: 20px 16px;
-    gap: 16px;                /* 画像と文字の間に余白 */
-  }
-
-  /* トップのアイコン画像を絶対配置していた場合は解除 */
-  .hero-icon,
-  .firstview img,
-  .top-icon {
-    position: static !important;  /* absoluteなどを解除 */
-    top: auto;
-    right: auto;
-    left: auto;
-    transform: none;
-    max-width: 55%;            /* 画像を小さめに */
-    height: auto;
-    margin: 0 auto;            /* 中央寄せ */
-    display: block;
-  }
-
-  /* 見出し・説明文がアイコンと重ならないよう余白確保 */
-  .hero h1,
-  .firstview h1,
-  .hero p,
-  .firstview p {
-    position: relative;
-    z-index: 2;                /* 文字を前面に */
-    margin-top: 8px;
-    padding: 0 8px;
-    word-break: break-word;    /* 長い文字の折り返し */
-  }
-}
 @media(max-width:640px){
   html{font-size:16px;}
   .merits{grid-template-columns:1fr;}
@@ -398,6 +360,112 @@ footer .logo{color:#fff;margin-bottom:8px;font-weight:800;font-size:1.15rem;}
   .tl-branch .pair .tl-card{min-width:0;}
   .tl-side{display:none;}
   .to-top{width:52px;height:52px;right:16px;bottom:16px;}
+}
+/* ===== カリキュラム（学習内容）アコーディオン ===== */
+.curriculum {
+  margin-top: 20px;
+}
+
+.curriculum-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background: linear-gradient(135deg, #ff8fb3, #ff5f8f);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 16px 20px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(255, 95, 143, 0.35);
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+.curriculum-toggle:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 20px rgba(255, 95, 143, 0.45);
+}
+.curriculum-toggle .arrow {
+  transition: transform .3s ease;
+  font-size: 1.3rem;
+}
+.curriculum-toggle.open .arrow {
+  transform: rotate(180deg);
+}
+
+/* 開閉パネル：max-heightアニメーション */
+.curriculum-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .45s ease;
+}
+.curriculum-inner {
+  background: #fff7fa;
+  border: 3px solid #ffd0de;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-top: 12px;
+}
+
+/* 大単元・小単元の見た目 */
+.cur-unit {
+  margin-bottom: 16px;
+}
+.cur-unit:last-child { margin-bottom: 0; }
+
+.cur-unit-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #d63a6b;
+  background: #ffe4ec;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+}
+.cur-unit-title::before {
+  content: "📘";
+  font-size: 1.1rem;
+}
+
+.cur-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 6px;
+}
+.cur-list li {
+  position: relative;
+  padding: 4px 0 4px 24px;
+  font-size: 0.98rem;
+  color: #444;
+  line-height: 1.5;
+}
+.cur-list li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #ff5f8f;
+  font-weight: 900;
+}
+
+/* 見出しグループ（導入編/基礎講座など）のラベル */
+.cur-group {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #7a4bd0;
+  margin: 14px 0 6px;
+  padding-left: 4px;
+}
+
+@media (max-width: 768px) {
+  .curriculum-toggle { font-size: 1rem; padding: 14px 14px; }
+  .cur-unit-title { font-size: 0.95rem; }
+  .cur-list li { font-size: 0.9rem; }
 }
 </style>
 </head>
@@ -557,6 +625,37 @@ footer .logo{color:#fff;margin-bottom:8px;font-weight:800;font-size:1.15rem;}
       </div>
       <p class="catch">✨ 「簿記ってなに？」から、たった10時間で“わかる”に変わる！</p>
       <div class="fee-tag"><span class="fi">💴</span>試験代：2,200円（税込）</div>
+<div class="curriculum">
+  <button class="curriculum-toggle" type="button">
+    <span class="label">この講座の学習内容を見る</span>
+    <span class="arrow">▼</span>
+  </button>
+  <div class="curriculum-body">
+    <div class="curriculum-inner">
+      <div class="cur-unit">
+        <div class="cur-unit-title">1単元　簿記の基本</div>
+        <ul class="cur-list"><li>授業の前に</li><li>簿記の基本知識</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">2単元　現金に関する取引</div>
+        <ul class="cur-list"><li>企業の設立</li><li>現金・預金</li><li>貸付金・借入金</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">3単元　商品売買に関する取引</div>
+        <ul class="cur-list"><li>商品売買取引の基本</li><li>さまざまな支払い手段</li><li>その他の商品売買</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">4単元　その他の取引</div>
+        <ul class="cur-list"><li>固定資産</li><li>その他の収益と費用</li><li>税金</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">5単元　簿記一巡の流れ</div>
+        <ul class="cur-list"><li>簿記の流れ</li><li>月次集計</li></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
       <p class="desc">簿記の基本を短期間で学べる入門講座です。「簿記とは何か」から丁寧に学習できるため、資格学習が初めての方でも安心して始められます。専門用語もひとつずつ噛み砕いて解説するので、数字が苦手な方でもつまずきません。短時間で基礎を身につけたい方にもおすすめです。</p>
       <div class="merits">
         <div class="merit"><div class="m-ico">⏱️</div><div class="m-t">最短で基礎習得</div><div class="m-d">1〜2週間ほどで簿記の全体像がつかめます</div></div>
@@ -587,6 +686,72 @@ footer .logo{color:#fff;margin-bottom:8px;font-weight:800;font-size:1.15rem;}
       </div>
       <p class="catch">✨ 履歴書に書ける！就職・転職で一番選ばれる王道資格</p>
       <div class="fee-tag"><span class="fi">💴</span>試験代：3,300円（税込）</div>
+<div class="curriculum">
+  <button class="curriculum-toggle" type="button">
+    <span class="label">この講座の学習内容を見る</span>
+    <span class="arrow">▼</span>
+  </button>
+  <div class="curriculum-body">
+    <div class="curriculum-inner">
+      <div class="cur-group">導入編</div>
+      <div class="cur-unit">
+        <ul class="cur-list"><li>導入編</li><li>受験申込</li></ul>
+      </div>
+
+      <div class="cur-group">基礎講座</div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">1単元　簿記の基本</div>
+        <ul class="cur-list"><li>簿記の基礎知識</li><li>簿記一巡の流れ</li><li>2つの財務諸表</li><li>取引・仕訳・転記</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">2単元　現金・預金</div>
+        <ul class="cur-list"><li>現金</li><li>預金</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">3単元　商品売買取引</div>
+        <ul class="cur-list"><li>商品売買取引の基本</li><li>さまざまな取引</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">4単元　固定資産</div>
+        <ul class="cur-list"><li>固定資産の購入</li><li>固定資産の減価償却と売却</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">5単元　その他の仕訳</div>
+        <ul class="cur-list"><li>債権と債務</li><li>収益と費用</li><li>訂正仕訳</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">6単元　株式会社会計</div>
+        <ul class="cur-list"><li>純資産（資本）</li><li>税金</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">7単元　帳簿と伝票</div>
+        <ul class="cur-list"><li>帳簿組織と主要簿</li><li>補助簿（1）</li><li>補助簿（2）</li><li>補助簿（3）</li><li>補助簿（4）</li><li>伝票</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">8単元　試算表</div>
+        <ul class="cur-list"><li>試算表</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">9単元　決算整理</div>
+        <ul class="cur-list"><li>決算の流れ</li><li>決算整理仕訳</li><li>帳簿決算</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">10単元　決算</div>
+        <ul class="cur-list"><li>財務諸表の作成</li><li>精算表</li></ul>
+      </div>
+
+      <div class="cur-group">トレーニング（全10単元）</div>
+      <div class="cur-unit">
+        <ul class="cur-list">
+          <li>1単元　簿記の基本</li><li>2単元　現金・預金</li><li>3単元　商品売買取引</li>
+          <li>4単元　固定資産</li><li>5単元　その他の仕訳</li><li>6単元　株式会社会計</li>
+          <li>7単元　帳簿と伝票</li><li>8単元　試算表</li><li>9単元　決算整理</li><li>10単元　決算</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
       <p class="desc">企業や個人事業の会計処理の基本を学ぶ人気資格です。就職・転職にも活かせる資格として、多くの方が受験しています。講座では基礎学習だけでなく、問題演習や模擬試験を通して本番形式に慣れながら試験合格を目指します。学んだ知識は実務でもそのまま役立ちます。</p>
       <div class="merits">
         <div class="merit"><div class="m-ico">💼</div><div class="m-t">就職・転職に有利</div><div class="m-d">経理・事務職で評価されやすい定番資格</div></div>
@@ -628,6 +793,33 @@ footer .logo{color:#fff;margin-bottom:8px;font-weight:800;font-size:1.15rem;}
       </div>
       <p class="catch" style="color:#1f8fc4;">✨ ラストスパートで合格をグッと引き寄せる総仕上げ！</p>
       <p class="desc">簿記3級の本試験に向けた総仕上げ講座です。頻出問題や時間配分、本番形式の演習を通して得点力を高めます。苦手分野を集中的に見直せるので、「あと少し」の不安を自信に変えて本番に臨めます。</p>
+<div class="curriculum">
+  <button class="curriculum-toggle" type="button">
+    <span class="label">この講座の学習内容を見る</span>
+    <span class="arrow">▼</span>
+  </button>
+  <div class="curriculum-body">
+    <div class="curriculum-inner">
+      <div class="cur-group">導入編</div>
+      <div class="cur-unit">
+        <ul class="cur-list"><li>授業のはじめに</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">1章　仕訳まるわかり編</div>
+        <ul class="cur-list"><li>仕訳の前提知識</li><li>仕訳の解法3ステップ</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">2章　Tフォーム編</div>
+        <ul class="cur-list"><li>Tフォームの解法3ステップ</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">3章　決算書作成編</div>
+        <ul class="cur-list"><li>精算表の解法3ステップ</li></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
       <div class="merits">
         <div class="merit"><div class="m-ico">🔥</div><div class="m-t">頻出問題を攻略</div><div class="m-d">出やすいポイントを重点的に対策</div></div>
         <div class="merit"><div class="m-ico">⏰</div><div class="m-t">時間配分が身につく</div><div class="m-d">本番形式で解くペースをつかめる</div></div>
@@ -653,6 +845,38 @@ footer .logo{color:#fff;margin-bottom:8px;font-weight:800;font-size:1.15rem;}
       </div>
       <p class="catch">✨ 2級で多くの人がつまずく「工業簿記」を、先取りでラクに攻略！</p>
       <div class="fee-tag"><span class="fi">💴</span>試験代：2,200円（税込）</div>
+<div class="curriculum">
+  <button class="curriculum-toggle" type="button">
+    <span class="label">この講座の学習内容を見る</span>
+    <span class="arrow">▼</span>
+  </button>
+  <div class="curriculum-body">
+    <div class="curriculum-inner">
+      <div class="cur-unit">
+        <div class="cur-unit-title">1単元　原価計算初級の学習をはじめよう</div>
+        <ul class="cur-list">
+          <li>授業の前に（原価計算初級検定と対策講座の概要）</li>
+          <li>原価計算の基礎知識（原価とは／原価計算とは／原価の分類／製品の原価構成）</li>
+        </ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">2単元　経営管理のための原価計算</div>
+        <ul class="cur-list">
+          <li>利益の計画をたてる（CVP分析／CVP分析の活用）</li>
+          <li>予算と実績を比較する（予算実績差異分析）</li>
+        </ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">3単元　損益計算のための原価計算</div>
+        <ul class="cur-list">
+          <li>原価の集計（製造原価の計算／月末仕掛品・月末製品）</li>
+          <li>実績をもとに利益を計算する（簿記の基礎知識と財務諸表／仕訳の基本／仕訳の作成／損益計算書の作成）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
       <p class="desc">簿記2級で学習する工業簿記の入口となる講座です。原価計算の基本を先に学んでおくことで、簿記2級の工業簿記をより理解しやすくなります。モノづくりの現場でコストがどう計算されるかを学べるため、製造業の実務理解にもつながります。</p>
       <div class="merits">
         <div class="merit"><div class="m-ico">🧩</div><div class="m-t">2級がスムーズ</div><div class="m-d">難関の工業簿記を先取りで理解しやすく</div></div>
@@ -679,6 +903,110 @@ footer .logo{color:#fff;margin-bottom:8px;font-weight:800;font-size:1.15rem;}
       </div>
       <p class="catch">✨ 経理のプロへ。企業から求められる“武器になる”資格</p>
       <div class="fee-tag"><span class="fi">💴</span>試験代：5,500円（税込）</div>
+<div class="curriculum">
+  <button class="curriculum-toggle" type="button">
+    <span class="label">この講座の学習内容を見る（商業簿記）</span>
+    <span class="arrow">▼</span>
+  </button>
+  <div class="curriculum-body">
+    <div class="curriculum-inner">
+      <div class="cur-group">導入編</div>
+      <div class="cur-unit">
+        <ul class="cur-list"><li>講座及び試験の概要</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">1単元　財務諸表概論</div>
+        <ul class="cur-list"><li>財務諸表概論</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">2単元　現金預金・手形などの取引</div>
+        <ul class="cur-list"><li>当座預金</li><li>手形</li><li>クレジット売掛金・電子記録債権債務</li><li>有価証券</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">3単元　商品売買取引</div>
+        <ul class="cur-list"><li>一般商品売買</li><li>収益認識</li><li>役務収益・役務原価</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">4単元　固定資産</div>
+        <ul class="cur-list"><li>固定資産</li><li>引当金</li><li>研究開発費</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">5単元　株式会社会計</div>
+        <ul class="cur-list"><li>個人商店と株式会社</li><li>合併と買収</li><li>剰余金の配当・処分</li><li>株主資本の計数の変動</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">6単元　税金</div>
+        <ul class="cur-list"><li>法人税・税効果会計</li><li>消費税</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">7単元　外貨建取引</div>
+        <ul class="cur-list"><li>外貨建取引</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">8単元　決算</div>
+        <ul class="cur-list"><li>決算とは</li><li>帳簿決算</li><li>財務諸表の作成</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">9単元　本支店会計</div>
+        <ul class="cur-list"><li>本支店会計とは</li><li>本支店合併財務諸表</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">10単元　連結会計</div>
+        <ul class="cur-list"><li>連結会計とは</li><li>連結修正仕訳</li><li>実践編</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">11単元　製造業を営む会社の決算処理</div>
+        <ul class="cur-list"><li>製造業とは</li><li>材料費・労務費・経費</li><li>決算書</li></ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="curriculum">
+  <button class="curriculum-toggle" type="button">
+    <span class="label">この講座の学習内容を見る（工業簿記）</span>
+    <span class="arrow">▼</span>
+  </button>
+  <div class="curriculum-body">
+    <div class="curriculum-inner">
+      <div class="cur-unit">
+        <div class="cur-unit-title">1単元　総論</div>
+        <ul class="cur-list"><li>工業簿記の基礎</li><li>原価の分類</li><li>勘定連絡図</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">2単元　費目別計算</div>
+        <ul class="cur-list"><li>材料費</li><li>労務費</li><li>経費</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">3単元　製造間接費</div>
+        <ul class="cur-list"><li>製造間接費の配賦</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">4単元　部門別計算</div>
+        <ul class="cur-list"><li>部門別計算</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">5単元　個別原価計算</div>
+        <ul class="cur-list"><li>個別原価計算</li><li>仕損の処理</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">6単元　財務諸表と工場会計の独立</div>
+        <ul class="cur-list"><li>製造業の財務諸表</li><li>工場会計の独立</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">7単元　総合原価計算</div>
+        <ul class="cur-list"><li>単純総合原価計算</li><li>組別総合原価計算</li><li>等級別総合原価計算</li><li>工程別総合原価計算</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">8単元　標準原価計算</div>
+        <ul class="cur-list"><li>標準原価計算の基礎</li><li>標準原価計算の勘定記入</li><li>標準原価計算の差異分析</li></ul>
+      </div>
+      <div class="cur-unit">
+        <div class="cur-unit-title">9単元　直接原価計算</div>
+        <ul class="cur-list"><li>直接原価計算の損益計算書</li><li>固定費調整</li><li>CVP分析</li><li>原価予測</li></ul>
+      </div>
+    </div>
+  </div>
+</div>
       <p class="desc">商業簿記に加え、工業簿記まで学習する実践的な講座です。経理・会計職を目指す方はもちろん、企業分析や経営管理など幅広い知識を身につけることができます。決算書を読み解く力が身につくので、ビジネスの数字に強くなりたい方にも最適です。</p>
       <div class="merits">
         <div class="merit"><div class="m-ico">📈</div><div class="m-t">キャリアアップ</div><div class="m-d">求人でも評価が高く、昇進・転職に有利</div></div>
@@ -762,6 +1090,20 @@ const io=new IntersectionObserver((entries)=>{
 },{threshold:0.12});
 document.querySelectorAll('.reveal').forEach((el)=>io.observe(el));
 </script>
-
+<script>
+  document.querySelectorAll('.curriculum-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var body = btn.nextElementSibling; // .curriculum-body
+      var isOpen = btn.classList.toggle('open');
+      if (isOpen) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        btn.querySelector('.label').textContent = '学習内容をとじる';
+      } else {
+        body.style.maxHeight = '0';
+        btn.querySelector('.label').textContent = 'この講座の学習内容を見る';
+      }
+    });
+  });
+</script>
 </body>
 </html>
